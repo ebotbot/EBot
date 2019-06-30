@@ -1,0 +1,13 @@
+{
+"parser": "babel-eslint",
+"parserOptions": {
+  "parser": "babel-eslint",
+  "ecmaVersion": 2017,
+  "sourceType": "module",
+},
+
+"env": {
+  "node": true,
+  "es6": true  // even though using 2017, need this for Promise to be global
+}
+}
