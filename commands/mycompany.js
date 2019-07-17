@@ -14,7 +14,7 @@ class MyCompany extends Command {
     const company = await this.client.database.findCompanyByOwner(message.author.id)
     if(!company) {return message.channel.send('You need a company!')}
     let embed =  new MessageEmbed()
-      .setTitle('Top 10 richest companies')
+      .setTitle('Your company')
       .setColor(0x000fff)
       .addField('Name', company.name)
       .addField('Code', company.shortName)
