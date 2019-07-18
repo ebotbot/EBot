@@ -12,7 +12,6 @@ module.exports = class extends Event {
     if(message.author.bot || message.channel.type === 'dm') return
     // database
     let guilddb = await this.getGuildData(message.guild.id)
-    let t = this.client.locale.getFixedT(guilddb.lang)
       
     if (message.guild && !message.guild.me) await message.guild.members.fetch(this.client.user)
     if(message.content === this.client.user.toString() || (message.guild && message.content === message.guild.me.toString())) {
@@ -24,13 +23,13 @@ module.exports = class extends Event {
     const args = message.content.slice(prefix[0].length).trim().split(/ +/g)
     const cmd = this.client.commands.get(args.shift().toLowerCase())
     if (!cmd) return
-    await this.runCommand(message, cmd, args, t)
+    await this.runCommand(message, cmd, args)
   }
-  async runCommand(message, cmd, args, t) {
+  async runCommand(message, cmd, args) {
     try {
       if(cmd.devCommand && !this.client.owners.owners.includes(message.author.id))
         return message.channel.send("Você não tem permissão para executar este comando!")
-      await cmd.run(message, args, t)
+      await cmd.run(message, args,)
     } catch (error) {
         console.log(error)
     }
