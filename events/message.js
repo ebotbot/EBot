@@ -11,14 +11,12 @@ module.exports = class extends Event {
     // Por enquanto não aceitar comandos via DM
     if(message.author.bot || message.channel.type === 'dm') return
     // database
-    let guilddb = await this.getGuildData(message.guild.id)
       
     if (message.guild && !message.guild.me) await message.guild.members.fetch(this.client.user)
     if(message.content === this.client.user.toString() || (message.guild && message.content === message.guild.me.toString())) {
       return message.reply("Olá, eu sou o EBOT")
     }
-    const gprefix = guilddb.prefix
-    const prefix = new RegExp(`^<@!?${this.client.user.id}> |^${this.client.methods.util.regExpEsc(gprefix)}`).exec(message.content)
+    const prefix = new RegExp(`^<@!?${this.client.user.id}> |^${this.client.methods.util.regExpEsc(process.env.PREFIX)}`).exec(message.content)
     if (!prefix) return
     const args = message.content.slice(prefix[0].length).trim().split(/ +/g)
     const cmd = this.client.commands.get(args.shift().toLowerCase())
