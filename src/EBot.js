@@ -46,9 +46,9 @@ class EBot extends Client {
           const companies = await this.database.manager.companies.find({})
           
           companies.forEach((company) => {
-            if(company.money == 0) {
+            if(company.money <= 0) {
               let owner = this.client.users.get(company.owner)
-              owner.send(`Your company ${company.name} has bankcorrupted!. Use e$createcompany to create another company`)
+              owner.send(`Sua empresa ${company.name} faliu!. Tente a sorte novamente com e$createcompany`)
               company.delete()
             }
           })
